@@ -168,4 +168,49 @@ Insert into CITY Values(4061, 'Fall River', 'USA', 'Massachusetts', 90555)
  Select DISTINCT CITY FROM STATION
  WHERE CITY LIKE '[^aeiou]%[^aeiou]'
  
- 
+/*
+Query a count of the number of cities in CITY having a Population larger than 100000.
+*/ 
+
+Select Count(NAME) 
+FROM CITY
+WHERE POPULATION > 100000
+
+
+/*
+Query the total population of all cities in CITY where District is California.
+*/
+
+Select sum(population) from CITY
+Where District = 'California'
+
+/*
+Query the average population of all cities in CITY where District is California.
+*/
+
+Select Avg(Population)
+From CITY
+Where DISTRICT = 'California'
+
+/*
+Query the average population for all cities in CITY, rounded down to 
+the nearest integer.
+*/
+
+Select FLOOR(Avg(population)) From CITY
+
+
+/*
+Query the sum of the populations for all Japanese cities in CITY. 
+The COUNTRYCODE for Japan is JPN.
+*/
+
+Select sum(Population) From CITY
+Where COUNTRYCODE = 'JPN'
+
+/*
+Query the difference between the maximum and minimum populations in CITY
+*/
+
+Select max(population)-min(population) 
+From City
