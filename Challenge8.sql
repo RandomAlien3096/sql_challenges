@@ -121,3 +121,13 @@ Query the Manhattan Distance between points P1 and P2 and round it to a scale of
 
 SELECT CAST(ABS(min(LAT_N)-max(LAT_N)) + ABS(min(LONG_W)-max(LONG_W)) AS DECIMAL(9,4))
 FROM STATION
+
+/*
+Consider  and  to be two points on a 2D plane where  are the respective minimum 
+and maximum values of Northern Latitude (LAT_N) and  are the respective minimum 
+and maximum values of Western Longitude (LONG_W) in STATION.
+
+Query the Euclidean Distance between points  and  and format your answer to display  decimal digits.
+*/
+Select cast(SQRT(SQUARE(min(LAT_N)-MAX(LAT_N))+SQUARE(MIN(LONG_W)-max(LONG_W))) AS DECIMAL(9,4))
+FROM STATION
