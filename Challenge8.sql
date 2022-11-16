@@ -131,3 +131,50 @@ Query the Euclidean Distance between points  and  and format your answer to disp
 */
 Select cast(SQRT(SQUARE(min(LAT_N)-MAX(LAT_N))+SQUARE(MIN(LONG_W)-max(LONG_W))) AS DECIMAL(9,4))
 FROM STATION
+
+
+
+/*
+A median is defined as a number separating the higher half of a data set from 
+the lower half. Query the median of the Northern Latitudes (LAT_N) from STATION
+and round your answer to  decimal places.
+*/
+
+DECLARE @c BIGINT = (SELECT COUNT(*) FROM STATION);
+
+SELECT CAST (AVG(1.0 * LAT_N) AS DECIMAL(9,4))
+FROM (
+    SELECT LAT_N FROM STATION
+     ORDER BY LAT_N
+     OFFSET (@c - 1) / 2 ROWS
+     FETCH NEXT 1 + (1 - @c % 2) ROWS ONLY
+) AS x;
+
+
+
+/*
+Given the CITY and COUNTRY tables, query the sum of the populations of all 
+cities where the CONTINENT is 'Asia'.
+
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+*/
+
+SELECT sum(CITY.POPULATION)
+from CITY
+FULL OUTER JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE
+Where COUNTRY.CONTINENT = "Asia"
+
+
+
+
+/*
+Given the CITY and COUNTRY tables, query the names of all cities 
+where the CONTINENT is 'Africa'.
+
+Note: CITY.CountryCode and COUNTRY.Code are matching key columns.
+*/
+
+SELECT CITY.NAME
+from CITY
+FULL OUTER JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE
+Where COUNTRY.CONTINENT = "Africa" and CITY.NAME IS NOT NULL
