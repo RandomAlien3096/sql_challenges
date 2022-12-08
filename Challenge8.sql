@@ -179,6 +179,11 @@ from CITY
 FULL OUTER JOIN COUNTRY ON CITY.COUNTRYCODE = COUNTRY.CODE
 Where COUNTRY.CONTINENT = "Africa" and CITY.NAME IS NOT NULL
 
+Select ct.name
+From city ct
+JOIN country cn on ct.countrycode = cn.code
+Where cn.continent = "Africa"
+
 /*
 Amber's conglomerate corporation just acquired some new companies. Each of the companies follows this hierarchy: 
 
